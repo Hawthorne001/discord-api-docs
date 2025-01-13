@@ -58,7 +58,7 @@ With that out of the way, open your new project in the code editor of your choic
 
 First, you'll need to create an app in the developer portal if you don't have one already:
 
-<Button href="https://discord.com/developers/applications?new_application=true" color="brand">Create App</Button>
+<LinkButton to="https://discord.com/developers/applications?new_application=true" color="brand">Create App</LinkButton>
 
 Enter a name for your app, then press **Create**.
 
@@ -71,7 +71,7 @@ While we're in your app's settings, we'll want to get a few sensitive values for
 > warn
 > Your token is used to authorize API requests and carry your app's permissions, so they are *highly* sensitive. Make sure to never share your token or check it into any kind of version control.
 
-Back in your project folder, rename the `.sample.env` file to `.env`. `.env` is where we'll store all of your app's credentials.
+Back in your project folder, rename the `.env.sample` file to `.env`. `.env` is where we'll store all of your app's credentials.
 
 We'll need three values from your app's settings for your `.env` file:
 
@@ -83,7 +83,7 @@ Now that you have the credentials you need, we'll configure your app to support 
 
 ### Add Guild Members intent
 
-The sample app fetches members in the server when constructing a fake game leaderboard. Getting server members requires a special permission called a [privileged intent](#DOCS_TOPICS_GATEWAY/privileged-intents), so we'll add that to our app.
+The sample app fetches members in the server when constructing a fake game leaderboard. Getting server members requires a special permission called a [privileged intent](#DOCS_EVENTS_GATEWAY/privileged-intents), so we'll add that to our app.
 
 Go to the **Bot** page and find the **Privileged Gateway Intents** section. Toggle "Server Member Intent" to be active.
 
@@ -93,7 +93,7 @@ An app's **[installation context](#DOCS_RESOURCES_APPLICATION/installation-conte
 
 We're going to configure our app to support both installation contexts, and while that's a good default for most apps, some apps may only make sense in one context or the other.
 
-In your app's settings, go to the **Installation** page from the sidebar. Under **Authorization Methods**, check both **User Install** and **Guild Install**, then press **Save Changes**.
+In your app's settings, go to the **Installation** page from the sidebar. Under **Installation Contexts**, check both **User Install** and **Guild Install**, then press **Save Changes**.
 
 ### Configuring Default Install Settings
 
@@ -218,7 +218,6 @@ Let's configure our app's **Interaction Endpoint URL**.
 
 Go to your [app's settings](https://discord.com/developers/applications) and on the **General Information** page under **Interaction Endpoint URL**, paste your new ngrok URL and append `/interactions` (it'll be something like `https://84c5df474.ngrok-free.dev/interactions`).
 
-
 Click **Save Changes** and if all is well, your Interactions Endpoint URL should be verified by Discord.
 
 > info
@@ -264,7 +263,7 @@ However, for this tutorial, we're going to focus more on the metadata related to
 
 ###### `context`
 
-`context`) tells you which [interaction context](#DOCS_INTERACTIONS_APPLICATION_COMMANDS/interaction-contexts) the command was invoked from. I triggered the command from my app's DM, so `context` is `1` (or `BOT_DM`).
+`context` tells you which [interaction context](#DOCS_INTERACTIONS_APPLICATION_COMMANDS/interaction-contexts) the command was invoked from. Since I triggered the command from my app's DM the `context` is `1` (or `BOT_DM`).
 
 With interaction context, something to keep in mind in `BOT_DM` is only the *DM with your bot user*. If you run the same command in a DM with your bestie, or in a group DM, the interaction context will be `PRIVATE_CHANNEL` (`2`).
 
@@ -356,7 +355,7 @@ There are two fields additional fields to know about that can be helpful in this
 
 ###### `interaction_metadata`
 
-Messages created in response to an interaction will include an [`interaction_metadata` object](#DOCS_RESOURCES_CHANNEL/message-interaction-metadata-object-message-interaction-metadata-structure) which includes metadata related to the interaction.
+Messages created in response to an interaction will include an [`interaction_metadata` object](#DOCS_RESOURCES_MESSAGE/message-interaction-metadata-object) which includes metadata related to the interaction.
 
 ###### `authorizing_integration_owners`
 

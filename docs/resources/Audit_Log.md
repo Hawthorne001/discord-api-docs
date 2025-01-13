@@ -1,3 +1,7 @@
+---
+sidebar_label: Audit Log
+---
+
 # Audit Logs Resource
 
 ## Audit Logs
@@ -67,7 +71,7 @@ The table below lists audit log events and values (the `action_type` field) that
 
 The **Object Changed** column notes which object's values may be included in the entry. Though there are exceptions, possible keys in the `changes` array typically correspond to the object's fields. The descriptions and types for those fields can be found in the linked documentation for the object.
 
-If no object is noted, there won't be a `changes` array in the entry, though other fields like the `target_id` still exist and many have fields in the [`options` array](#DOCS_RESOURCES_AUDIT_LOG/audit-log-entry-object-optional-audit-entry-info).
+If no object is noted, there won't be a `changes` array in the entry, though other fields like the `target_id` still exist and many have fields in the [`options` object](#DOCS_RESOURCES_AUDIT_LOG/audit-log-entry-object-optional-audit-entry-info).
 
 > info
 > You should assume that your app may run into any field for the changed object, though none are guaranteed to be present. In most cases only a subset of the object's fields will be in the `changes` array.
@@ -122,6 +126,9 @@ If no object is noted, there won't be a `changes` array in the entry, though oth
 | THREAD_UPDATE                               | 111   | Thread was updated                                        | [Thread](#DOCS_RESOURCES_CHANNEL/thread-metadata-object)                                                                                         |
 | THREAD_DELETE                               | 112   | Thread was deleted                                        | [Thread](#DOCS_RESOURCES_CHANNEL/thread-metadata-object)                                                                                         |
 | APPLICATION_COMMAND_PERMISSION_UPDATE       | 121   | Permissions were updated for a command                    | [Command Permission](#DOCS_INTERACTIONS_APPLICATION_COMMANDS/application-command-permissions-object-application-command-permissions-structure)\* |
+| SOUNDBOARD_SOUND_CREATE                     | 130   | Soundboard sound was created                              | [Soundboard Sound](#DOCS_RESOURCES_SOUNDBOARD/soundboard-sound-object)                                                                           |
+| SOUNDBOARD_SOUND_UPDATE                     | 131   | Soundboard sound was updated                              | [Soundboard Sound](#DOCS_RESOURCES_SOUNDBOARD/soundboard-sound-object)                                                                           |
+| SOUNDBOARD_SOUND_DELETE                     | 132   | Soundboard sound was deleted                              | [Soundboard Sound](#DOCS_RESOURCES_SOUNDBOARD/soundboard-sound-object)                                                                           |
 | AUTO_MODERATION_RULE_CREATE                 | 140   | Auto Moderation rule was created                          | [Auto Moderation Rule](#DOCS_RESOURCES_AUTO_MODERATION/auto-moderation-rule-object)                                                              |
 | AUTO_MODERATION_RULE_UPDATE                 | 141   | Auto Moderation rule was updated                          | [Auto Moderation Rule](#DOCS_RESOURCES_AUTO_MODERATION/auto-moderation-rule-object)                                                              |
 | AUTO_MODERATION_RULE_DELETE                 | 142   | Auto Moderation rule was deleted                          | [Auto Moderation Rule](#DOCS_RESOURCES_AUTO_MODERATION/auto-moderation-rule-object)                                                              |

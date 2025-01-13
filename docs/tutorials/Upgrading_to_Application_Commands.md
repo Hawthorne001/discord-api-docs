@@ -1,3 +1,7 @@
+---
+sidebar_label: Upgrading to Application Commands
+---
+
 # Upgrading Apps to Use Application Commands
 
 As [message content has become a privileged intent](https://support-dev.discord.com/hc/en-us/articles/4404772028055-Message-Content-Privileged-Intent-FAQ) for verified apps, [application commands](#DOCS_INTERACTIONS_APPLICATION_COMMANDS) are the primary way Discord users interact with apps. The three types of commands (slash commands, user commands, and message commands) act as entry points into apps, and can be registered globally or for a subset of guilds.
@@ -124,17 +128,17 @@ Permissions for specific roles, users, and channels can be updated by your app i
 
 ## Handling Commands
 
-Commands use the [interactions model](#DOCS_INTERACTIONS_RECEIVING_AND_RESPONDING) through HTTP-based outgoing webhooks or the WebSocket-based [Interaction Create gateway event](#DOCS_TOPICS_GATEWAY_EVENTS/interaction-create). Regardless of the transit method used to arrive, your app will receive relevant information when a Discord user triggers one of your app’s interactions.
+Commands use the [interactions model](#DOCS_INTERACTIONS_RECEIVING_AND_RESPONDING) through HTTP-based outgoing webhooks or the WebSocket-based [Interaction Create gateway event](#DOCS_EVENTS_GATEWAY_EVENTS/interaction-create). Regardless of the transit method used to arrive, your app will receive relevant information when a Discord user triggers one of your app’s interactions.
 
 > warn
-> If you continue using Gateway events, you’ll still receive message events but the payloads will have empty string or array data for message content-related fields like `content`, `embeds`, `attachments`, and `components` while `poll` will be omitted. You can read more in the [message content intent](#DOCS_TOPICS_GATEWAY/message-content-intent) section.
+> If you continue using Gateway events, you’ll still receive message events but the payloads will have empty string or array data for message content-related fields like `content`, `embeds`, `attachments`, and `components` while `poll` will be omitted. You can read more in the [message content intent](#DOCS_EVENTS_GATEWAY/message-content-intent) section.
 
 For commands, this means that each time one of your commands is used, your app will receive information like the command name and the user who triggered it. More information about this information is below in the section on [parsing command payloads](#DOCS_TUTORIALS_UPGRADING_TO_APPLICATION_COMMANDS/parsing-command-payloads).
 
 ### Adding an Interactions Endpoint URL
 
 > info
-> This step is specific to receiving interactions over HTTP. If you prefer to use the [Gateway](#DOCS_TOPICS_GATEWAY), this step won't be applicable to your app.
+> This step is specific to receiving interactions over HTTP. If you prefer to use the [Gateway](#DOCS_EVENTS_GATEWAY), this step won't be applicable to your app.
 
 Before your app can receive interactions, you’ll need to set up an **Interaction Endpoint URL** in your app settings. This endpoint should be a public URL where Discord can send all interactions-related requests.
 
@@ -144,7 +148,7 @@ However, before adding your URL to your app settings, your endpoint must be set 
 2. **Verifying request signatures**: To ensure that requests are coming from Discord, your endpoint must verify each request using the included headers, specifically `X-Signature-Ed25519` and `X-Signature-Timestamp`. If the signature fails validating, your app should return a `401` response. More information and example code can be found in the [Security and Authorization documentation](#DOCS_INTERACTIONS_OVERVIEW/setting-up-an-endpoint-validating-security-request-headers).
 
 > info
-> Many libraries on the [Community Resources page](#DOCS_TOPICS_COMMUNITY_RESOURCES/interactions) simplify verification and interaction request handling by exporting reusable functions and/or handling it automatically.
+> Many libraries on the [Community Resources page](#DOCS_DEVELOPER_TOOLS_COMMUNITY_RESOURCES/interactions) simplify verification and interaction request handling by exporting reusable functions and/or handling it automatically.
 
 After your URL is set up to handle signature verification and `PING` requests, you can add your Interaction Endpoint URL by navigating to your app settings from the [developer portal](https://discord.com/developers/applications). On the **General Information** page, you’ll see a field for your **Interactions Endpoint URL**. 
 
